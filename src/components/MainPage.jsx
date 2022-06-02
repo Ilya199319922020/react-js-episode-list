@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import EpisodeList from './Episode/EpisodeList';
-import * as axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getEpisodesList } from '../store/selectors';
+import { fetchEpisodes } from '../store/reducers/episodesReducer';
 
 function MainPage(props) {
-	const [episodeList, setEpisodeList] = useState(null);
 
+	const episodes = useSelector(getEpisodesList);
+	const [episodeList, setEpisodeList] = useState(null);
 	return (
 		<>
 			<h1>
@@ -17,6 +20,7 @@ function MainPage(props) {
 							episodeList={episodeList}
 						/>
 						: <LoadingPage
+							episodeList={episodeList}
 							setEpisodeList={setEpisodeList}
 						/>
 				}
@@ -28,15 +32,12 @@ function MainPage(props) {
 export default MainPage;
 
 
-function LoadingPage({ setEpisodeList }) {
+function LoadingPage({ setEpisodeList, episodeList }) {
+
+	const dispatch = useDispatch();
 
 	const onGetEpisodesList = () => {
-		axios.get('https://breakingbadapi.com/api/episodes')
-			.then((response) => {
-				console.log(response.data)
-				setEpisodeList(response.data)
-			}
-			);
+		dispatch(fetchEpisodes())
 	};
 
 	return (

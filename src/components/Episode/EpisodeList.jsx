@@ -20,7 +20,6 @@ function EpisodeList({ episodeList }) {
 				<button>
 					Сортировать по возрастанию количества персонажей
 				</button>
-
 			</div>
 			<div>
 				{episodeElement}
