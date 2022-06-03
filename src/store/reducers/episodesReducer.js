@@ -1,6 +1,7 @@
 import { EpisodesApi } from "../../api/api";
 
 const FETCH_EPISODES = 'FETCH_EPISODES';
+const DELETE_EPISODE = 'DELETE_EPISODE';
 
 const initialState = {
 	episodes: [],
@@ -13,6 +14,13 @@ const episodesReducer = (state = initialState, action) => {
 				...state,
 				episodes: action.episodes,
 			}
+		case DELETE_EPISODE: {
+			return {
+				...state,
+				episodes: state.episodes
+					.filter(item => action.id !== item.episode_id)
+			}
+		}
 		default:
 			return state;
 	}
@@ -20,6 +28,7 @@ const episodesReducer = (state = initialState, action) => {
 
 const actions = {
 	setFetchEpisodes: (episodes) => ({ type: FETCH_EPISODES, episodes }),
+	deleteEpisodeId: (id) => ({ type: DELETE_EPISODE, id }),
 };
 
 export const fetchEpisodes = () => {
@@ -28,6 +37,12 @@ export const fetchEpisodes = () => {
 		if (response.status === 200) {
 			dispatch(actions.setFetchEpisodes(response.data));
 		}
+	}
+};
+
+export const deleteEpisode = (id) => {
+	return async (dispatch) => {
+		dispatch(actions.deleteEpisodeId(id));
 	}
 };
 

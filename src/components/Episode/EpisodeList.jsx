@@ -7,6 +7,7 @@ function EpisodeList({ episodes, setDeependingIsSorting,setAscendingIsSorting}) 
 		.map(p => <EpisodeElement
 			key={p.episode_id}
 			episode={p.episode}
+			episode_id={p.episode_id}
 			characters={p.characters}
 		/>
 		);

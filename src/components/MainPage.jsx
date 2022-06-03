@@ -20,7 +20,7 @@ function MainPage(props) {
 		: isAscendingSorting ? getSortAscendingCharacters
 			: getEpisodesList
 	);
-
+	
 	return (
 		<>
 			<h1>
