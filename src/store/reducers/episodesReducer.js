@@ -25,8 +25,9 @@ const actions = {
 export const fetchEpisodes = () => {
 	return async (dispatch) => {
 		const response = await EpisodesApi.getEpisodes()
-
-		dispatch(actions.setFetchEpisodes(response));
+		if (response.status === 200) {
+			dispatch(actions.setFetchEpisodes(response.data));
+		}
 	}
 };
 

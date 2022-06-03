@@ -1,23 +1,35 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { EpisodeElement } from './EpisodeElement';
 
-function EpisodeList({ episodeList }) {
+function EpisodeList({ episodes, setDeependingIsSorting,setAscendingIsSorting}) {
 
-	const episodeElement = episodeList
+	const episodeElement = episodes
 		.map(p => <EpisodeElement
 			key={p.episode_id}
 			episode={p.episode}
 			characters={p.characters}
 		/>
 		);
+	const onSortDeependingCharacters = () => {
+		setAscendingIsSorting(false)
+		setDeependingIsSorting(true)
+	};
+	const onSortAscendingCharacters = () => {
+		setDeependingIsSorting(false)
+		setAscendingIsSorting(true)
+	};
 
 	return (
 		<div>
 			<div>
-				<button>
+				<button
+					onClick={onSortDeependingCharacters}
+				>
 					Сортировать по убыванию количества персонажей
 				</button>
-				<button>
+				<button
+					onClick={onSortAscendingCharacters}
+				>
 					Сортировать по возрастанию количества персонажей
 				</button>
 			</div>

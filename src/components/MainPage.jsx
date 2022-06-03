@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
 import EpisodeList from './Episode/EpisodeList';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEpisodesList } from '../store/selectors';
 import { fetchEpisodes } from '../store/reducers/episodesReducer';
+import { getEpisodesList, getSortDeependingCharacters, getSortAscendingCharacters } from '../store/selectors';
+
 
 function MainPage(props) {
+	const dispatch = useDispatch();
 
-	const episodes = useSelector(getEpisodesList);
-	const [episodeList, setEpisodeList] = useState(null);
+	const [isDeependingSorting, setDeependingIsSorting] = useState(false);
+	const [isAscendingSorting, setAscendingIsSorting] = useState(false);
+
+	const onGetEpisodesList = () => {
+		dispatch(fetchEpisodes())
+	};
+
+	const episodes = useSelector(isDeependingSorting
+		? getSortDeependingCharacters
+		: isAscendingSorting ? getSortAscendingCharacters
+			: getEpisodesList
+	);
+
 	return (
 		<>
 			<h1>
@@ -15,14 +28,19 @@ function MainPage(props) {
 			</h1>
 			<div>
 				{
-					episodeList
+					episodes.length > 0
 						? <EpisodeList
-							episodeList={episodeList}
+							setDeependingIsSorting={setDeependingIsSorting}
+							setAscendingIsSorting={setAscendingIsSorting}
+							episodes={episodes}
 						/>
-						: <LoadingPage
-							episodeList={episodeList}
-							setEpisodeList={setEpisodeList}
-						/>
+						: <div>
+							<button
+								onClick={onGetEpisodesList}
+							>
+								Загрузить эпизоды
+							</button>
+						</div>
 				}
 			</div>
 		</>
@@ -32,23 +50,5 @@ function MainPage(props) {
 export default MainPage;
 
 
-function LoadingPage({ setEpisodeList, episodeList }) {
 
-	const dispatch = useDispatch();
-
-	const onGetEpisodesList = () => {
-		dispatch(fetchEpisodes())
-	};
-
-	return (
-		<div className={'MainPage'}>
-
-			<button
-				onClick={onGetEpisodesList}
-			>
-				Загрузить эпизоды
-			</button>
-		</div>
-	);
-};
 

@@ -8,7 +8,6 @@ export function EpisodeElement({ episode, characters }) {
 
 		);
 	};
-	console.log(characters.length)
 	return (
 		<div>
 			
@@ -18,7 +17,7 @@ export function EpisodeElement({ episode, characters }) {
 				</span>
 				<div>
 					<button
-						onclick={handleClick}
+						onClick={handleClick}
 					>
 						-
 					</button>
@@ -26,7 +25,7 @@ export function EpisodeElement({ episode, characters }) {
 						{characters.length}
 					</span>
 					<button
-						onclick={handleClick}
+						onClick={handleClick}
 					>
 						+
 					</button>
