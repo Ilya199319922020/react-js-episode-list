@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { EpisodeElement } from './EpisodeElement';
 import { Card, Grid, CardActions, Button } from '@mui/material';
 
-function EpisodeList({ episodes, setDeependingIsSorting, setAscendingIsSorting }) {
+function EpisodeList({ episodes }) {
 
-	const episodeElement = episodes
+	const [sortEpisodes, setSortEpisodes] = useState(episodes);
+	const [isSort, setIsSort] = useState(true);
+
+	const episodeElement = sortEpisodes
 		.map(p => <EpisodeElement
 			key={p.episode_id}
 			episode={p.episode}
@@ -12,13 +15,19 @@ function EpisodeList({ episodes, setDeependingIsSorting, setAscendingIsSorting }
 			characters={p.characters}
 		/>
 		);
-	const onSortDeependingCharacters = () => {
-		setAscendingIsSorting(false)
-		setDeependingIsSorting(true)
-	};
-	const onSortAscendingCharacters = () => {
-		setDeependingIsSorting(false)
-		setAscendingIsSorting(true)
+
+	const handleSort = () => {
+		if (isSort) {
+			const sorted = sortEpisodes
+				.sort((a, b) => (b.characters.length - a.characters.length));
+			setSortEpisodes(sorted);
+			setIsSort(!isSort);
+		} else {
+			const sorted = sortEpisodes
+				.sort((a, b) => (a.characters.length - b.characters.length));
+			setSortEpisodes(sorted);
+			setIsSort(!isSort);
+		}
 	};
 
 	return (
@@ -35,7 +44,7 @@ function EpisodeList({ episodes, setDeependingIsSorting, setAscendingIsSorting }
 						fontSize: 10
 					}}
 					variant="contained"
-					onClick={onSortDeependingCharacters}
+					onClick={handleSort}
 				>
 					Сортировать по убыванию количества персонажей
 				</Button>
@@ -45,7 +54,7 @@ function EpisodeList({ episodes, setDeependingIsSorting, setAscendingIsSorting }
 						fontSize: 10
 					}}
 					variant="contained"
-					onClick={onSortAscendingCharacters}
+					onClick={handleSort}
 				>
 					Сортировать по возрастанию количества персонажей
 				</Button>

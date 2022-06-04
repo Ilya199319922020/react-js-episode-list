@@ -1,26 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEpisodes } from '../store/reducers/episodesReducer';
 import { Container } from '@mui/material';
-import { getEpisodesList, getSortDeependingCharacters, getSortAscendingCharacters } from '../store/selectors';
+import { getEpisodesList } from '../store/selectors';
 import Header from './Episode/Header/Header';
 import { LoadingEpisodes } from './Episode/LoadingEpisodes/LoadingEpisodes';
 import EpisodeList from './Episode/EpisodeList';
 
 function MainPage(props) {
-	const dispatch = useDispatch();
-	const [isDeependingSorting, setDeependingIsSorting] = useState(false);
-	const [isAscendingSorting, setAscendingIsSorting] = useState(false);
 
-	const onGetEpisodesList = () => {
-		dispatch(fetchEpisodes())
-	};
-
-	const episodes = useSelector(isDeependingSorting
-		? getSortDeependingCharacters
-		: isAscendingSorting ? getSortAscendingCharacters
-			: getEpisodesList
-	);
+	const episodes = useSelector(getEpisodesList);
 
 	return (
 		<>
@@ -36,8 +24,6 @@ function MainPage(props) {
 					episodes.length > 0
 						?
 						<EpisodeList
-							setDeependingIsSorting={setDeependingIsSorting}
-							setAscendingIsSorting={setAscendingIsSorting}
 							episodes={episodes}
 						/>
 						: <LoadingEpisodes />
