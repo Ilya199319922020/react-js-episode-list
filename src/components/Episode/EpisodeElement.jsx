@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteEpisode } from "../../store/reducers/episodesReducer";
+import { Card, Grid, CardContent, Typography, CardActions, Button } from '@mui/material';
+
 
 export function EpisodeElement({ episode_id, characters, episode }) {
 	const [charactersCounter, setCharactersCounter] = useState(characters.length);
@@ -22,41 +24,86 @@ export function EpisodeElement({ episode_id, characters, episode }) {
 	};
 
 	return (
-		<div>
-			<div>
-				<span>
-					Эпизод №{episode}
-				</span>
-				<div>
-					<button
-						onClick={handleDecreaseClick}
+		<Grid
+			item
+			sx={{
+				display: "flex"
+			}}
+		>
+			<Card>
+				<CardContent
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "center",
+					}}
+				>
+					<Typography
+						variant="h6"
+						component={"span"}
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+						}}
 					>
-						-
-					</button>
-					<span>
-						{charactersCounter}
-					</span>
-					<button
-						onClick={handleIncreaseClick}
+						Эпизод №{episode}
+					</Typography>
+					<CardActions
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+						}}
 					>
-						+
-					</button>
-					<span>
-						Персонаж{
+						<Button
+							sx={{
+								maxWidth: "30px",
+								maxHeight: "20px",
+							}}
+							variant="outlined"
+							onClick={handleDecreaseClick}
+						>
+							-
+						</Button>
+					</CardActions>
+
+					<Typography
+						variant="h7"
+						component={"span"}
+						textAlign="center"
+					>
+						{charactersCounter} персонаж{
 							charactersCounter > 1
 								? 'ей'
 								: ''
 						}
-					</span>
-				</div>
-			</div>
-			<div>
-				<button
-					onClick={onRemoveEpisode}
-				>
-					Удалить
-				</button>
-			</div>
-		</div>
+					</Typography>
+					<CardActions
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+						}}
+					>
+						<Button
+							sx={{
+								maxWidth: "30px",
+								maxHeight: "20px",
+							}}
+							variant="outlined"
+							onClick={handleIncreaseClick}
+						>
+							+
+						</Button>
+					</CardActions>
+				</CardContent>
+				<CardActions>
+					<Button
+						variant="contained"
+						onClick={onRemoveEpisode}
+					>
+						Удалить
+					</Button>
+				</CardActions>
+			</Card>
+		</Grid>
 	);
 };

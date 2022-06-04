@@ -8,7 +8,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/episodeList' element={<EpisodeList />} />
         <Route path='/' element={<MainPage />} />
       </Routes>
     </BrowserRouter>

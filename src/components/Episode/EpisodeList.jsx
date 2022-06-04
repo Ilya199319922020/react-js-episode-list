@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { EpisodeElement } from './EpisodeElement';
+import { Card, Grid, CardActions, Button } from '@mui/material';
 
-function EpisodeList({ episodes, setDeependingIsSorting,setAscendingIsSorting}) {
+function EpisodeList({ episodes, setDeependingIsSorting, setAscendingIsSorting }) {
 
 	const episodeElement = episodes
 		.map(p => <EpisodeElement
@@ -21,23 +22,46 @@ function EpisodeList({ episodes, setDeependingIsSorting,setAscendingIsSorting}) 
 	};
 
 	return (
-		<div>
-			<div>
-				<button
+		<Card>
+			<CardActions
+				sx={{
+					display: "flex",
+					justifyContent: "center",
+				}}
+			>
+				<Button
+					size="small"
+					sx={{
+						fontSize: 10
+					}}
+					variant="contained"
 					onClick={onSortDeependingCharacters}
 				>
 					Сортировать по убыванию количества персонажей
-				</button>
-				<button
+				</Button>
+				<Button
+					size="small"
+					sx={{
+						fontSize: 10
+					}}
+					variant="contained"
 					onClick={onSortAscendingCharacters}
 				>
 					Сортировать по возрастанию количества персонажей
-				</button>
-			</div>
-			<div>
+				</Button>
+			</CardActions>
+			<Grid
+				container
+				spacing={4}
+				sx={{
+					mb: "1rem",
+					mt: "0.5rem",
+					justifyContent: "center",
+				}}
+			>
 				{episodeElement}
-			</div>
-		</div>
+			</Grid>
+		</Card>
 	);
 };
 
