@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { EpisodeElement } from './EpisodeElement';
 import { Card, Grid, CardActions, Button } from '@mui/material';
 
-
 function EpisodeList({ episodes }) {
 
 	const [sortEpisodes, setSortEpisodes] = useState([]);
@@ -34,7 +33,6 @@ function EpisodeList({ episodes }) {
 			setIsSort(!isSort);
 		}
 	};
-
 
 	return (
 		<Card>

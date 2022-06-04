@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Header from './Episode/Header/Header';
+import EpisodeList from './Episode/EpisodeList';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '@mui/material';
 import { getEpisodesList } from '../store/selectors';
-import Header from './Episode/Header/Header';
 import { LoadingEpisodes } from './Episode/LoadingEpisodes/LoadingEpisodes';
-import EpisodeList from './Episode/EpisodeList';
 import { fetchEpisodes } from '../store/reducers/episodesReducer';
 
 function MainPage(props) {
-	const [isLoadingEpisodes, setIsLoadingEpisodes] = useState(false)
 	const dispatch = useDispatch();
+	const episodes = useSelector(getEpisodesList);
 
 	const onGetEpisodesList = () => {
 		dispatch(fetchEpisodes())
 	};
-	const episodes = useSelector(getEpisodesList);
 
 	return (
 		<>
