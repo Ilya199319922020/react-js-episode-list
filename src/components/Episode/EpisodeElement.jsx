@@ -3,42 +3,47 @@ import { useDispatch } from "react-redux";
 import { deleteEpisode } from "../../store/reducers/episodesReducer";
 
 export function EpisodeElement({ episode_id, characters, episode }) {
-	const [charactersCounter, setCharactersCounter] = useState(0);
+	const [charactersCounter, setCharactersCounter] = useState(characters.length);
 	const dispatch = useDispatch();
 
 	const onRemoveEpisode = () => {
 		dispatch(deleteEpisode(episode_id))
 	};
 
-	const handleClick = () => {
-		setCharactersCounter(
-		);
+	const handleDecreaseClick = () => {
+		if (charactersCounter > 1) {
+			setCharactersCounter(prev => prev - 1)
+		}
+	};
+	const handleIncreaseClick = () => {
+		if (charactersCounter < characters.length) {
+			setCharactersCounter(charactersCounter + 1)
+		}
 	};
 
 	return (
 		<div>
-
 			<div>
 				<span>
 					Эпизод №{episode}
 				</span>
 				<div>
 					<button
-						onClick={handleClick}
+						onClick={handleDecreaseClick}
 					>
 						-
 					</button>
 					<span>
-						{characters.length - 1}
+						{charactersCounter}
 					</span>
 					<button
-						onClick={handleClick}
+						onClick={handleIncreaseClick}
 					>
 						+
 					</button>
 					<span>
 						Персонаж{
-							charactersCounter > 0
+							charactersCounter > 1
 								? 'ей'
 								: ''
 						}
