@@ -6,6 +6,8 @@ import { Card, Grid, CardContent, Typography, CardActions, Button } from '@mui/m
 
 export function EpisodeElement({ episode_id, characters, episode }) {
 	const [charactersCounter, setCharactersCounter] = useState(characters.length);
+	const [isRemove, setIsRemove] = useState(false);
+
 	const dispatch = useDispatch();
 
 	const onRemoveEpisode = () => {

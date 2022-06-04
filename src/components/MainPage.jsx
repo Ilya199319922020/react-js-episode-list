@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '@mui/material';
 import { getEpisodesList } from '../store/selectors';
 import Header from './Episode/Header/Header';
 import { LoadingEpisodes } from './Episode/LoadingEpisodes/LoadingEpisodes';
 import EpisodeList from './Episode/EpisodeList';
+import { fetchEpisodes } from '../store/reducers/episodesReducer';
 
 function MainPage(props) {
+	const [isLoadingEpisodes, setIsLoadingEpisodes] = useState(false)
+	const dispatch = useDispatch();
 
+	const onGetEpisodesList = () => {
+		dispatch(fetchEpisodes())
+	};
 	const episodes = useSelector(getEpisodesList);
 
 	return (
@@ -26,7 +32,9 @@ function MainPage(props) {
 						<EpisodeList
 							episodes={episodes}
 						/>
-						: <LoadingEpisodes />
+						: <LoadingEpisodes
+							onGetEpisodesList={onGetEpisodesList}
+						/>
 				}
 			</Container>
 		</>
