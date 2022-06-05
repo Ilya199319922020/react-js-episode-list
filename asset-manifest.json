@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-js-episode-list/static/css/main.0dc65fc2.css",
+    "main.js": "/react-js-episode-list/static/js/main.ab902706.js",
+    "index.html": "/react-js-episode-list/index.html",
+    "main.0dc65fc2.css.map": "/react-js-episode-list/static/css/main.0dc65fc2.css.map",
+    "main.ab902706.js.map": "/react-js-episode-list/static/js/main.ab902706.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0dc65fc2.css",
+    "static/js/main.ab902706.js"
+  ]
+}
