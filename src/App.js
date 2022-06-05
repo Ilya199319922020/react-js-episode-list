@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<MainPage />} />
+        <Route path='/react-js-episode-list' element={<MainPage />} />
       </Routes>
     </BrowserRouter>
   );
