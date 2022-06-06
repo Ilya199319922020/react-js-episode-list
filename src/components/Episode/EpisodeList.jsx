@@ -3,9 +3,8 @@ import { EpisodeElement } from './EpisodeElement';
 import { Card, Grid, CardActions, Button } from '@mui/material';
 
 function EpisodeList({ episodes }) {
-
 	const [sortEpisodes, setSortEpisodes] = useState([]);
-	const [isSort, setIsSort] = useState(true);
+	
 
 	useEffect(() => {
 		setSortEpisodes(episodes)
@@ -20,18 +19,16 @@ function EpisodeList({ episodes }) {
 		/>
 		);
 
-	const handleSort = () => {
-		if (isSort) {
-			const sorted = sortEpisodes
-				.sort((a, b) => (b.characters.length - a.characters.length));
-			setSortEpisodes(sorted);
-			setIsSort(!isSort);
-		} else {
-			const sorted = sortEpisodes
-				.sort((a, b) => (a.characters.length - b.characters.length));
-			setSortEpisodes(sorted);
-			setIsSort(!isSort);
-		}
+	const handleDescendingSort = () => {
+		const sorted = [...sortEpisodes]
+			.sort((a, b) => (b.characters.length - a.characters.length));
+		setSortEpisodes(sorted);
+	};
+
+	const handleAscendingSort = () => {
+		const sorted = [...sortEpisodes]
+			.sort((a, b) => (a.characters.length - b.characters.length));
+		setSortEpisodes(sorted);
 	};
 
 	return (
@@ -48,7 +45,7 @@ function EpisodeList({ episodes }) {
 						fontSize: 10
 					}}
 					variant="contained"
-					onClick={handleSort}
+					onClick={handleDescendingSort}
 				>
 					Сортировать по убыванию количества персонажей
 				</Button>
@@ -58,7 +55,7 @@ function EpisodeList({ episodes }) {
 						fontSize: 10
 					}}
 					variant="contained"
-					onClick={handleSort}
+					onClick={handleAscendingSort}
 				>
 					Сортировать по возрастанию количества персонажей
 				</Button>
